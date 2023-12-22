@@ -1,0 +1,97 @@
+# Name of your application. Used to uniquely configure containers.
+service: myserver
+
+# Name of the container image.
+image: nginx #user/my-app
+
+# Deploy to these servers.
+servers:
+  - 44.202.22.7
+
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  registry: 586283906760.dkr.ecr.us-east-1.amazonaws.com
+  username: AWS
+
+  # Always use an access token rather than real password when possible.
+  password: eyJwYXlsb2FkIjoiR2ZQZUhickIxQllBTjFxZGpmWEVIQkxic0tNd1ZRbDNad3lpSzNTUStMV21wb0xOR1YrbmNmdThQblZpMzRHcW00RDdKZTNySGhPbUZ6VVlMME5MZC9FdS8yTkFia28zRXlDT3c3QzRkUUd1MFBtM1ZBenpoMFp6dTIvdHhXTndrWFcyelV4OWIzUmlWOWVKYlhiTHlmbThqbjJHSmtVK0ZLRVRDODJpSFMrSmp0cm15aVF2djZBdEY1VkZ3STBoUkZkbkM1ZjM0Tk1QajNHVVZWNkxqU2Y4RzJ0NUJyb3VDSUZ0dVJqeHV3SWtJOUNhOXZ2d0lTNjlBa1g0UnFQc1AxTUlmLytWYlVSaEdBM3IwRFc3dEFKSi9YMVFQSmhCK2VyWi9xNnlLTHpIeTl5UlkrVDJDd0d0TnUwUzNyTU15S3VHYXVFVHIyVHdGSkNNUGdEcVJ3dWdWcnpQN292YjBvZCtVZ0NkREJnb05vUnh6dW9help6b3BIKzlxbWV4M3VIWnJtLzlkdWlJWlVSRVJtTE9IMXFmNlQxYjBvVzNFYVJ3STl3KzA1bDhLcUR6WmNHL3B4Q2Q1VE1TMm9DeDNuOE1mZkhPMFFrRVV1NlgvbDFvZE11eTlESjdBcTNxRUVoc0xudDBzRkJaWnY4UWlPSlRkdmhNY0dIWVlPaDhPdk0rQmxhTkwySFNUbmxDVGNvaUtUSlpydkpjSll1UVZTcTdqb1BMNiswdU1xZFc4S1dxMkg4WmZ4bHpDRy9ZMjNveSt6UkEzNHZCT1p3NGtIa1Y2NERCM25PdUtDNkdCa2RBa0xJb3FEL1lTVWpYUDRCajNjUGwxTHdPRU1QQkV2am9DNzJVUjBuOEcvUmd6WmNEMFdPQ2pQOHowWW1BZ1hDV2c2Y01BdldOSGtId0owdmRXLzNNWTE0YWVGTGVoYVA5Mit3TUxxTEJ2YmRtYnpOU0czekhVYTJtY3c0b2l5UGFrNVFzM2R1QjJUVHl6VklEdkY2TDlPNTNHeGtucmx4OHMrQlp2V25SbmZvUjNiMzlRcHdmTTF1ZTlpU3BHMHZFdnhzM1JxN1lHUUsxSHRKMEN6b3pFM1A0STNUU3IzTVpLekJRTjd3ZlFybkxHQmhkckRZS1FGcklUSjFxSTVCcXpqY0xKMXEzZ2dHUTJQZzZUK253enVXZzFlVWFvbjQrcU5RcG1HakhIRXpYbys0a1RVbUloSENONVR4U3FCRzROWi9CdkJsUzd5MHkvRTdpT3pmNVVSVGVsYzNyMTlKVzlhUFNVNmh3UVdKamNzamRyb3ZWZnRyV2U1ZDVKSW5GVTV2MUpkeE85ekhoLzBRbzJUL25UNWtmbmxzQUdwT1NmTlJYQVNZU0ZrRjJDRjZpaUo2YnJVM0gvOHl2Nnc9PSIsImRhdGFrZXkiOiJBUUVCQUhod20wWWFJU0plUnRKbTVuMUc2dXFlZWtYdW9YWFBlNVVGY2U5UnE4LzE0d0FBQUg0d2ZBWUpLb1pJaHZjTkFRY0dvRzh3YlFJQkFEQm9CZ2txaGtpRzl3MEJCd0V3SGdZSllJWklBV1VEQkFFdU1CRUVES2lzazNkcXFnaVV2OC9QdUFJQkVJQTdnY3NQT3M2TGc2aVA2bis3TlM5a0hNZU1SalNhMGoyWVhYRDhiVlVaUjl5ZXVyV2JqdzZkVjFEbUx3dFZteFBjbFZOcWk1TTJ4YWJmUEIwPSIsInZlcnNpb24iOiIyIiwidHlwZSI6IkRBVEFfS0VZIiwiZXhwaXJhdGlvbiI6MTcwMzI3NTEyOX0=
+
+# Inject ENV variables into containers (secrets come from .env).
+# Remember to run `kamal env push` after making changes!
+# env:
+#   clear:
+#     DB_HOST: 192.168.0.2
+#   secret:
+#     - RAILS_MASTER_KEY
+
+# Use a different ssh user than root
+ssh:
+  user: ubuntu
+
+# Configure builder setup.
+# builder:
+#   args:
+#     RUBY_VERSION: 3.2.0
+#   secrets:
+#     - GITHUB_TOKEN
+#   remote:
+#     arch: amd64
+#     host: ssh://app@192.168.0.1
+
+# Use accessory services (secrets come from .env).
+# accessories:
+#   db:
+#     image: mysql:8.0
+#     host: 192.168.0.2
+#     port: 3306
+#     env:
+#       clear:
+#         MYSQL_ROOT_HOST: '%'
+#       secret:
+#         - MYSQL_ROOT_PASSWORD
+#     files:
+#       - config/mysql/production.cnf:/etc/mysql/my.cnf
+#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
+#     directories:
+#       - data:/var/lib/mysql
+#   redis:
+#     image: redis:7.0
+#     host: 192.168.0.2
+#     port: 6379
+#     directories:
+#       - data:/data
+
+# Configure custom arguments for Traefik
+# traefik:
+#   args:
+#     accesslog: true
+#     accesslog.format: json
+
+# Configure a custom healthcheck (default is /up on port 3000)
+# healthcheck:
+#   path: /healthz
+#   port: 4000
+
+# Bridge fingerprinted assets, like JS and CSS, between versions to avoid
+# hitting 404 on in-flight requests. Combines all files from new and old
+# version inside the asset_path.
+# asset_path: /rails/public/assets
+
+# Configure rolling deploys by setting a wait time between batches of restarts.
+# boot:
+#   limit: 10 # Can also specify as a percentage of total hosts, such as "25%"
+#   wait: 2
+
+# Configure the role used to determine the primary_host. This host takes
+# deploy locks, runs health checks during the deploy, and follow logs, etc.
+#
+# Caution: there's no support for role renaming yet, so be careful to cleanup
+#          the previous role on the deployed hosts.
+# primary_role: web
+
+# Controls if we abort when see a role with no hosts. Disabling this may be
+# useful for more complex deploy configurations.
+#
+# allow_empty_roles: false
