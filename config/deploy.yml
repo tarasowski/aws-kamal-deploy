@@ -2,7 +2,7 @@
 service: myserver
 
 # Name of the container image.
-image: nginx #user/my-app
+image: nginx
 
 # Deploy to these servers.
 servers:
@@ -16,7 +16,7 @@ registry:
   username: AWS
 
   # Always use an access token rather than real password when possible.
-  password: eyJwYXlsb2FkIjoiR2ZQZUhickIxQllBTjFxZGpmWEVIQkxic0tNd1ZRbDNad3lpSzNTUStMV21wb0xOR1YrbmNmdThQblZpMzRHcW00RDdKZTNySGhPbUZ6VVlMME5MZC9FdS8yTkFia28zRXlDT3c3QzRkUUd1MFBtM1ZBenpoMFp6dTIvdHhXTndrWFcyelV4OWIzUmlWOWVKYlhiTHlmbThqbjJHSmtVK0ZLRVRDODJpSFMrSmp0cm15aVF2djZBdEY1VkZ3STBoUkZkbkM1ZjM0Tk1QajNHVVZWNkxqU2Y4RzJ0NUJyb3VDSUZ0dVJqeHV3SWtJOUNhOXZ2d0lTNjlBa1g0UnFQc1AxTUlmLytWYlVSaEdBM3IwRFc3dEFKSi9YMVFQSmhCK2VyWi9xNnlLTHpIeTl5UlkrVDJDd0d0TnUwUzNyTU15S3VHYXVFVHIyVHdGSkNNUGdEcVJ3dWdWcnpQN292YjBvZCtVZ0NkREJnb05vUnh6dW9help6b3BIKzlxbWV4M3VIWnJtLzlkdWlJWlVSRVJtTE9IMXFmNlQxYjBvVzNFYVJ3STl3KzA1bDhLcUR6WmNHL3B4Q2Q1VE1TMm9DeDNuOE1mZkhPMFFrRVV1NlgvbDFvZE11eTlESjdBcTNxRUVoc0xudDBzRkJaWnY4UWlPSlRkdmhNY0dIWVlPaDhPdk0rQmxhTkwySFNUbmxDVGNvaUtUSlpydkpjSll1UVZTcTdqb1BMNiswdU1xZFc4S1dxMkg4WmZ4bHpDRy9ZMjNveSt6UkEzNHZCT1p3NGtIa1Y2NERCM25PdUtDNkdCa2RBa0xJb3FEL1lTVWpYUDRCajNjUGwxTHdPRU1QQkV2am9DNzJVUjBuOEcvUmd6WmNEMFdPQ2pQOHowWW1BZ1hDV2c2Y01BdldOSGtId0owdmRXLzNNWTE0YWVGTGVoYVA5Mit3TUxxTEJ2YmRtYnpOU0czekhVYTJtY3c0b2l5UGFrNVFzM2R1QjJUVHl6VklEdkY2TDlPNTNHeGtucmx4OHMrQlp2V25SbmZvUjNiMzlRcHdmTTF1ZTlpU3BHMHZFdnhzM1JxN1lHUUsxSHRKMEN6b3pFM1A0STNUU3IzTVpLekJRTjd3ZlFybkxHQmhkckRZS1FGcklUSjFxSTVCcXpqY0xKMXEzZ2dHUTJQZzZUK253enVXZzFlVWFvbjQrcU5RcG1HakhIRXpYbys0a1RVbUloSENONVR4U3FCRzROWi9CdkJsUzd5MHkvRTdpT3pmNVVSVGVsYzNyMTlKVzlhUFNVNmh3UVdKamNzamRyb3ZWZnRyV2U1ZDVKSW5GVTV2MUpkeE85ekhoLzBRbzJUL25UNWtmbmxzQUdwT1NmTlJYQVNZU0ZrRjJDRjZpaUo2YnJVM0gvOHl2Nnc9PSIsImRhdGFrZXkiOiJBUUVCQUhod20wWWFJU0plUnRKbTVuMUc2dXFlZWtYdW9YWFBlNVVGY2U5UnE4LzE0d0FBQUg0d2ZBWUpLb1pJaHZjTkFRY0dvRzh3YlFJQkFEQm9CZ2txaGtpRzl3MEJCd0V3SGdZSllJWklBV1VEQkFFdU1CRUVES2lzazNkcXFnaVV2OC9QdUFJQkVJQTdnY3NQT3M2TGc2aVA2bis3TlM5a0hNZU1SalNhMGoyWVhYRDhiVlVaUjl5ZXVyV2JqdzZkVjFEbUx3dFZteFBjbFZOcWk1TTJ4YWJmUEIwPSIsInZlcnNpb24iOiIyIiwidHlwZSI6IkRBVEFfS0VZIiwiZXhwaXJhdGlvbiI6MTcwMzI3NTEyOX0=
+  password: <%= %x(echo $AWS_ECR_PASSWORD) %>
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
@@ -32,8 +32,8 @@ ssh:
   loggin: debug
 
 builder:
-  dockerfile: Dockerfile
-  context: ./nginx
+  dockerfile: "./nginx/Dockerfile"
+  context: "./nginx"
 
 # Configure builder setup.
 # builder:
@@ -75,9 +75,9 @@ builder:
 #     accesslog.format: json
 
 # Configure a custom healthcheck (default is /up on port 3000)
-# healthcheck:
-#   path: /healthz
-#   port: 4000
+healthcheck:
+  path: /up
+  port: 80
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old
