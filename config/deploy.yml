@@ -4,8 +4,8 @@ service: myserver
 # Name of the container image.
 image: nginx
 
-# ❌ you need to create a directory on the host machine for the acme.json file
-# ❌ run kamal traefik reboot after the initial setup
+# ❌ First create create a directory on the host machine for the acme.json file before kamal setup or kamal deploy
+# ❌ Then run kamal traefik reboot after the initial setup
 # read more https://github.com/basecamp/kamal/discussions/112
 servers:
   web:
